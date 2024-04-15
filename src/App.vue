@@ -19,10 +19,13 @@
 		},
 		methods: {
 			getCardsFromApi(){
-				axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php", { params: this.queryParams })
-				.then((response) => {
+				setTimeout(() => {
+					axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php", { params: this.queryParams })
+					.then((response) => {
 					store.deck = response.data.data;
+					store.loading = false
 				})
+				}, 2000); //almeno si vede per un tot
 			}
 		},
 		mounted(){

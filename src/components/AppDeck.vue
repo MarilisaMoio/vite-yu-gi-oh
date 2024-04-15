@@ -18,7 +18,10 @@
 <template>
     <main>
         <div class="container">
-            <GameCard v-for="card in store.deck" :key="card.id" :card="card"></GameCard>
+            <template v-if="!store.loading">
+                <GameCard v-for="card in store.deck" :key="card.id" :card="card"></GameCard>
+            </template>
+            <img v-else="store.loading" src="https://i.redd.it/xo7baaby2ac31.gif">
         </div>
     </main>
 </template>
@@ -27,6 +30,7 @@
     main{
         background-color: salmon;
         padding: 40px 0px;
+        min-height: 700px;
     }
 
     .container{
@@ -38,5 +42,8 @@
         gap: 20px;
         padding: 40px;
         align-content: flex-start;
+        img{
+            margin: 0 auto;
+        }
     }
 </style>
