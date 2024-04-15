@@ -1,11 +1,13 @@
 <script>
 	import AppDeck from "./components/AppDeck.vue"
+	import AppHeader from "./components/AppHeader.vue"
 	import { store } from "./store.js";
 	import axios from 'axios';
 
 	export default{
 		components: {
 			AppDeck,
+			AppHeader
 		},
 		data(){
 			return {
@@ -20,7 +22,6 @@
 				axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php", { params: this.queryParams })
 				.then((response) => {
 					store.deck = response.data.data;
-					console.log(store.deck)
 				})
 			}
 		},
@@ -31,6 +32,7 @@
 </script>
 
 <template>
+	<AppHeader></AppHeader>
 	<AppDeck></AppDeck>
 </template>
 
