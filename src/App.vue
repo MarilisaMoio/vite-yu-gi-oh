@@ -25,7 +25,7 @@
 			}
 		},
 		mounted(){
-			//this.getCardsFromApi()
+			this.getCardsFromApi()
 		}
 	}
 </script>
