@@ -19,7 +19,7 @@
         text-align: center;
         width: calc(100% / 4 - 15px);
         box-shadow: 0 0 8px 2px black;
-        padding-bottom: 10px;
+        min-height: 440px;
     }
 
     img{
