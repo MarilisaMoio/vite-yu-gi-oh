@@ -14,8 +14,9 @@
 </template>
 
 <style scoped lang="scss">
+    @use '../style/partials/variables' as *;
     .card{
-        background-color: orange;
+        background-color: $main_color;
         text-align: center;
         width: calc(100% / 4 - 15px);
         box-shadow: 0 0 8px 2px black;
