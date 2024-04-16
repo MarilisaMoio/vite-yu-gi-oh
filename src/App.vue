@@ -31,7 +31,6 @@
 					axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php", { params: this.queryParams })
 					.then((response) => {
 					store.deck = response.data.data;
-					console.log("ciaoo!", this.queryParams)
 				})
 			},
 			filterApi(){
