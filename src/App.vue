@@ -13,6 +13,7 @@
 		},
 		data(){
 			return {
+				store,
 				queryParams: {
 					num: 20,
 					offset: 0
@@ -24,35 +25,31 @@
 				axios.get("https://db.ygoprodeck.com/api/v7/archetypes.php")
 				.then((response) => {
 					store.archList = response.data;
-					console.log(store.archList)
 				})
 			},
 			getCardsFromApi(){
-				setTimeout(() => {
 					axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php", { params: this.queryParams })
 					.then((response) => {
 					store.deck = response.data.data;
-					store.loading = false
+					console.log("ciaoo!", this.queryParams)
 				})
-				}, 2000); //almeno si vede per un tot
 			},
 			filterApi(){
-				if (store.filteredArch !== ""){
-					this.queryParams.archetype = store.filteredArch
-				} else{
-					delete this.queryParams.archetype
-				};
+				let thisParams = { ...this.queryParams};
+				thisParams.archetype = store.filteredArch;
 
-				axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php", { params: this.queryParams })
+				axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php", { params: thisParams })
 				.then((response) => {
 				store.deck = response.data.data;
-				console.log = response.data.data;
 				})
 			}
 		},
 		mounted(){
 			this.getArchetypesFromApi(),
-			this.getCardsFromApi()
+			setTimeout(() => {
+				this.getCardsFromApi()
+				store.loading = false
+			}, 2000); //almeno si vede per un tot
 		}
 	}
 </script>
@@ -60,7 +57,7 @@
 <template>
 	<AppHeader></AppHeader>
 	<main>
-		<AppSelect @filterDeck="filterApi"></AppSelect>
+		<AppSelect @filterDeck="store.filteredArch !== '' ? filterApi() : getCardsFromApi()"></AppSelect>
 		<AppDeck></AppDeck>
 	</main>
 </template>
